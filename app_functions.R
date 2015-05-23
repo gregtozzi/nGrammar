@@ -31,7 +31,7 @@ clean_input <- function(x) {
   cleanOut <- gsub("\\d", " ", cleanOut, perl = TRUE)
   cleanOut <- gsub("^ *|(?<= ) | *$", "", cleanOut, perl=TRUE)
   cleanOut <- unlist(strsplit(cleanOut, " "))
-  paste(tail(cleanOut, 3), collapse = " ")
+  paste(tail(cleanOut, 4), collapse = " ")
 }
 
 strCut <- function(x, n) {
@@ -43,9 +43,10 @@ model_search <- function(x, Model) {
   cleanIn <- clean_input(x)
   lengthIn <- length(unlist(strsplit(cleanIn, " ")))
   if(lengthIn == 0) return("the")
-  modelTry <- lapply(1:lengthIn, function(y) subset(Model[[y]], uniqueIn == strCut(cleanIn, y)))
-  fullyFormed <- sapply(modelTry, nrow)
-  if(sum(fullyFormed) == 0) return("the")
-  whichOne <- max(which(fullyFormed == 1))
-  modelTry[[whichOne]]$maxOut
+  modelTry <- unlist(lapply(1:lengthIn,
+                     function(y) !is.null(unlist(Model[[y]][strCut(cleanIn, y)]))))
+  validInputs <- sum(modelTry)
+  if(validInputs == 0) return("the")
+  rawOut <- Model[[validInputs]][strCut(cleanIn, validInputs)]
+  list(rawOut[[1]][[1]], rawOut[[1]][[2]])
 }
