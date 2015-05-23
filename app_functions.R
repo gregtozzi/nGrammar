@@ -1,0 +1,51 @@
+clean_input <- function(x) {
+  cleanOut <- tolower(x)
+  cleanOut <- gsub("\u0092s ", "", cleanOut, perl = TRUE)
+  cleanOut <- gsub("st. louis", "st louis", cleanOut, perl = TRUE)
+  cleanOut <- gsub("george w. bush", "george w bush", cleanOut, perl = TRUE)
+  cleanOut <- gsub("^#", " ", cleanOut, perl = TRUE) 
+  cleanOut <- gsub("'", "", cleanOut, perl = TRUE)
+  cleanOut <- gsub("…", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("“", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("”", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("‘", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("’", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("–", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub(" the ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub(" is ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub(" at ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub(" which ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub(" on ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub(" a ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub(" an ", " ", cleanOut, perl = TRUE)
+  cleanout <- gsub(" and ", " ", x, perl = TRUE)
+  cleanOut <- gsub("^the ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("^is ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("^at ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("^which ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("^on ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("^a ", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("^an ", " ", cleanOut, perl = TRUE)
+  cleanout <- gsub("^and ", " ", x, perl = TRUE)
+  cleanOut <- gsub("(?![<s>])[[:punct:]]", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("\\d", " ", cleanOut, perl = TRUE)
+  cleanOut <- gsub("^ *|(?<= ) | *$", "", cleanOut, perl=TRUE)
+  cleanOut <- unlist(strsplit(cleanOut, " "))
+  paste(tail(cleanOut, 3), collapse = " ")
+}
+
+strCut <- function(x, n) {
+  sString <- unlist(strsplit(x, " "))
+  paste(tail(sString, n), collapse = " ")
+}
+
+model_search <- function(x, Model) {
+  cleanIn <- clean_input(x)
+  lengthIn <- length(unlist(strsplit(cleanIn, " ")))
+  if(lengthIn == 0) return("the")
+  modelTry <- lapply(1:lengthIn, function(y) subset(Model[[y]], uniqueIn == strCut(cleanIn, y)))
+  fullyFormed <- sapply(modelTry, nrow)
+  if(sum(fullyFormed) == 0) return("the")
+  whichOne <- max(which(fullyFormed == 1))
+  modelTry[[whichOne]]$maxOut
+}
