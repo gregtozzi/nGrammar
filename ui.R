@@ -17,11 +17,13 @@ shinyUI(fluidPage(theme = "nGrammar.css",
                                                               id="inputText",
                                                               name = "inputText",
                                                               class = "inputLine",
-                                                              placeholder = "Copy your text here...")))}))),
+                                                              placeholder = "Copy or type your text here...")))}))),
                   
-                  # The output line
+                  # The new output line
                   fluidRow(column(12,
-                                  uiOutput(outputId="value",
-                                           class="theAnswer")))
+                                  uiOutput("button_1"),
+                                  uiOutput("button_2"),
+                                  uiOutput("button_3")
+                  ))
 
                   ))

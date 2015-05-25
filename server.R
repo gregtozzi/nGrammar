@@ -5,8 +5,20 @@ load('pentGramModel')
 
 shinyServer(function(input, output) {
   
-  # You can access the value of the widget with input$text, e.g.
-  #output$value <- renderUI({ clean_input(input$inputText) })
-  output$value <- renderUI({ model_search(input$inputText, finalModel)[[1]] })
+  modelOutput <- reactive({
+    model_search(input$inputText, finalModel)[[1]]
+  })
+  
+  output$button_1 <- renderUI({
+    actionButton("button1", label = modelOutput()[1])
+  })
+  
+  output$button_2 <- renderUI({
+    actionButton("button2", label = modelOutput()[2])
+  })
+  
+  output$button_3 <- renderUI({
+    actionButton("button3", label = modelOutput()[3])
+  })
   
 })
