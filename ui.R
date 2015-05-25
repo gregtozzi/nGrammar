@@ -22,4 +22,6 @@ shinyUI(fluidPage(theme = "nGrammar.css",
                   # The output line
                   fluidRow(column(12,
                                   uiOutput(outputId="value",
-                                           class="theAnswer")))))
+                                           class="theAnswer")))
+
+                  ))
