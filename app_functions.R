@@ -74,9 +74,9 @@ model_search <- function(x, Model) {
 }
 
 text_color <- function(x) {
-  if(x < 0.2) return("color:#828282")
-  if(x < 0.4) return("color:#787878")
-  if(x < 0.6) return("color:#696969")
-  if(x < 0.8) return("color:#5C5C5C")
-  "color:#FF1300"
+  if(x < 0.2) return("color:#74a9cf")
+  if(x < 0.4) return("color:#3690c0")
+  if(x < 0.6) return("color:#0570b0")
+  if(x < 0.8) return("color:#045a8d")
+  "color:#023858"
 }
