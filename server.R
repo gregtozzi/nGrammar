@@ -9,16 +9,12 @@ shinyServer(function(input, output) {
     model_search(input$inputText, finalModel)[[1]]
   })
   
-  output$button_1 <- renderUI({
-    actionButton("button1", label = modelOutput()[1])
-  })
-  
-  output$button_2 <- renderUI({
-    actionButton("button2", label = modelOutput()[2])
-  })
-  
-  output$button_3 <- renderUI({
-    actionButton("button3", label = modelOutput()[3])
+  output$button_row <- renderUI({
+    div(class = "container",
+        style = "text-align:center",
+        actionButton("button1", label = modelOutput()[1]),
+        actionButton("button2", label = modelOutput()[2]),
+        actionButton("button3", label = modelOutput()[3]))
   })
   
 })
