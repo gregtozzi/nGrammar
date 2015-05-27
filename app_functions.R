@@ -72,3 +72,11 @@ model_search <- function(x, Model) {
   }
   list(rawOut[[1]][[1]], rawOut[[1]][[2]])
 }
+
+text_color <- function(x) {
+  if(x < 0.2) return("color:#828282")
+  if(x < 0.4) return("color:#787878")
+  if(x < 0.6) return("color:#696969")
+  if(x < 0.8) return("color:#5C5C5C")
+  "color:#FF1300"
+}
