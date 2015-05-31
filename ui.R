@@ -27,6 +27,12 @@ shinyUI(fluidPage(theme = "nGrammar.css",
                                   uiOutput("button_row")
                   )),
                   
-                  actionButton(inputId = "button4", label = "click me")
-
+                  # The javascript-enabled output line
+                  fluidRow(column(12,
+                                  withTags({div(class = "container",
+                                                style = "text-align:center",
+                                                actionButton("button4", label = "button4"),
+                                                actionButton("button5", label = "button5"),
+                                                actionButton("button6", label = "button6"))})))
+                                                
                   ))
