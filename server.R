@@ -3,7 +3,7 @@ source('app_functions.R')
 load('model_output')
 load('pentGramModel')
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   
   modelOutput <- reactive({
     model_search(input$inputText, finalModel)
@@ -16,5 +16,7 @@ shinyServer(function(input, output) {
         actionButton("button2", label = modelOutput()[[1]][2], style = text_color(modelOutput()[[2]][[2]])),
         actionButton("button3", label = modelOutput()[[1]][3], style = text_color(modelOutput()[[2]][[3]])))
   })
+  
+  onclick(expr = js$inputAppend("Mitt"), id = "button4")
   
 })

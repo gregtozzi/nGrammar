@@ -1,6 +1,9 @@
 library(shiny)
+library(shinyjs)
 
 shinyUI(fluidPage(theme = "nGrammar.css",
+                  useShinyjs(),
+                  extendShinyjs("www/nGrammar.js"),
                   
                   # Application title
                   title = "n|Grammar",
@@ -22,6 +25,8 @@ shinyUI(fluidPage(theme = "nGrammar.css",
                   # The new output line
                   fluidRow(column(12,
                                   uiOutput("button_row")
-                  ))
+                  )),
+                  
+                  actionButton(inputId = "button4", label = "click me")
 
                   ))
