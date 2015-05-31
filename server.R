@@ -17,6 +17,8 @@ shinyServer(function(input, output, session) {
         actionButton("button3", label = modelOutput()[[1]][3], style = text_color(modelOutput()[[2]][[3]])))
   })
   
-  onclick(expr = js$inputAppend("Mitt"), id = "button4")
+  onclick(expr = js$inputAppend(modelOutput()[[1]][1]), id = "button4")
+  onclick(expr = js$inputAppend(modelOutput()[[1]][2]), id = "button5")
+  onclick(expr = js$inputAppend(modelOutput()[[1]][3]), id = "button6")
   
 })

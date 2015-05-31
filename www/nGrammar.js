@@ -4,5 +4,5 @@ shinyjs.inputAppend = function(inText){
 };
 
 shinyjs.labelChange = function(buttonId, newLabel){
-    getElementById("button4").label="fuck off"
+    getElementById("button4").label="new label"
 };
